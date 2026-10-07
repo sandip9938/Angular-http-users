@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  min-height: 100%;
+  color-scheme: dark;
+  background: #090e18;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: #e7edf7;
+  background: #090e18;
+}
+
+button,
+input {
+  font: inherit;
+}
