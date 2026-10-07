@@ -1,0 +1,106 @@
+<main class="page">
+  <h1>User Management</h1>
+  <p class="subtitle">
+    Angular 22 + HttpClient + Reactive Forms + JSONPlaceholder
+  </p>
+
+  <section class="card">
+    <h2>Add User</h2>
+
+    <form [formGroup]="userForm" (ngSubmit)="addUser()" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" formControlName="name" />
+
+          @if (name.touched && name.hasError('required')) {
+            <small class="error">Name is required.</small>
+          }
+
+          @if (name.touched && name.hasError('minlength')) {
+            <small class="error">Name must contain at least 2 characters.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+
+          @if (email.touched && email.hasError('required')) {
+            <small class="error">Email is required.</small>
+          }
+
+          @if (email.touched && email.hasError('email')) {
+            <small class="error">Enter a valid email address.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" type="text" formControlName="phone" />
+
+          @if (phone.touched && phone.hasError('required')) {
+            <small class="error">Phone is required.</small>
+          }
+
+          @if (phone.touched && phone.hasError('minlength')) {
+            <small class="error">Phone must contain at least 5 characters.</small>
+          }
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="submitting()">
+        @if (submitting()) {
+          Adding...
+        } @else {
+          Add User
+        }
+      </button>
+    </form>
+  </section>
+
+  @if (apiError()) {
+    <p class="api-error">{{ apiError() }}</p>
+  }
+
+  <section class="card">
+    <div class="table-header">
+      <h2>User List</h2>
+      <button type="button" class="secondary" (click)="loadUsers()">
+        Reload
+      </button>
+    </div>
+
+    @if (loading()) {
+      <p>Loading users...</p>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (user of users(); track user.id ?? $index) {
+              <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="4">No users found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</main>
