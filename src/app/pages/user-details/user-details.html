@@ -1,0 +1,65 @@
+<main class="page">
+  <nav class="page-nav" aria-label="Breadcrumb">
+    <a class="back-link" routerLink="/users">
+      <span aria-hidden="true">←</span>
+      <span>All users</span>
+    </a>
+    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+    <span class="current-page">User profile</span>
+  </nav>
+
+  @if (loading()) {
+    <section class="profile-card" aria-live="polite">
+      <p class="loading-message">Loading user profile...</p>
+    </section>
+  } @else if (error()) {
+    <section class="profile-card error-card" role="alert">
+      <p class="error-message">{{ error() }}</p>
+      <a class="back-link" routerLink="/users">Return to user list</a>
+    </section>
+  } @else if (user(); as currentUser) {
+    <header class="profile-heading">
+      <p class="eyebrow">USER PROFILE</p>
+      <h1>Personal details</h1>
+      <p class="page-description">Contact information and account details for this user.</p>
+    </header>
+
+    <section class="profile-card">
+      <div class="identity">
+        <div class="avatar" aria-hidden="true">{{ getInitials(currentUser.name) }}</div>
+        <div class="identity-copy">
+          <p class="identity-label">USER</p>
+          <h2>{{ currentUser.name }}</h2>
+          <span class="user-id">ID <strong>{{ currentUser.id }}</strong></span>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <h3>Contact information</h3>
+        <span>Your available contact details</span>
+      </div>
+
+      <dl class="details-grid">
+        <div class="detail-item">
+          <dt><span class="detail-icon" aria-hidden="true">@</span>Email address</dt>
+          <dd><a [href]="'mailto:' + currentUser.email">{{ currentUser.email }}</a></dd>
+        </div>
+        <div class="detail-item">
+          <dt><span class="detail-icon phone-icon" aria-hidden="true">P</span>Phone number</dt>
+          <dd><a [href]="'tel:' + currentUser.phone">{{ currentUser.phone }}</a></dd>
+        </div>
+        @if (currentUser.website) {
+          <div class="detail-item">
+            <dt><span class="detail-icon web-icon" aria-hidden="true">↗</span>Website</dt>
+            <dd>
+              <a [href]="websiteUrl(currentUser.website)" target="_blank" rel="noopener noreferrer">
+                {{ currentUser.website }}
+                <span class="external-label">Opens in new tab</span>
+              </a>
+            </dd>
+          </div>
+        }
+      </dl>
+    </section>
+  }
+</main>

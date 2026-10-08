@@ -12,8 +12,11 @@ export const routes: Routes = [
         component: Users,
       },
       {
+        path: 'users/:id',
+        loadComponent: () => import('./pages/user-details/user-details').then(m => m.UserDetails),
+      },
+      {
         path: '**',
         redirectTo: 'users',
       },
-    
 ];

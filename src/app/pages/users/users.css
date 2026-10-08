@@ -63,6 +63,45 @@ h2 {
   backdrop-filter: blur(16px);
 }
 
+.form-heading {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 26px;
+}
+
+.form-heading-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid rgba(167, 179, 255, 0.24);
+  border-radius: 13px;
+  color: #cbd2ff;
+  background: rgba(139, 157, 255, 0.12);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.form-eyebrow {
+  margin: 1px 0 5px;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.form-heading h2 {
+  margin: 0;
+}
+
+.form-description {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -77,6 +116,8 @@ h2 {
   font-weight: 600;
 }
 
+.required-mark, .form-note > span { color: #ff9cab; }
+
 .field input {
   width: 100%;
   box-sizing: border-box;
@@ -87,6 +128,7 @@ h2 {
   color: var(--text);
   background: rgba(7, 12, 21, 0.58);
   font: inherit;
+  font-size: 0.9rem;
   transition:
     border-color 160ms ease,
     box-shadow 160ms ease,
@@ -106,6 +148,8 @@ h2 {
   background: rgba(7, 12, 21, 0.8);
   box-shadow: 0 0 0 3px rgba(139, 157, 255, 0.17);
 }
+
+.field input.ng-invalid.ng-touched { border-color: rgba(255, 138, 154, 0.62); }
 
 .error,
 .api-error {
@@ -159,6 +203,38 @@ button:disabled {
   opacity: 0.58;
   box-shadow: none;
 }
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.79rem;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.form-actions button { margin-top: 0; }
+.form-actions .primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+.form-actions .primary-action span { font-size: 1.1rem; line-height: 1; }
 
 .secondary {
   margin-top: 0;
@@ -227,6 +303,16 @@ tbody tr:hover {
   background: rgba(148, 163, 184, 0.045);
 }
 
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.row-actions .secondary {
+  margin-top: 0;
+}
+
 td[colspan] {
   padding: 28px 16px;
   color: var(--muted);
@@ -248,6 +334,15 @@ td[colspan] {
     padding: 20px;
     border-radius: 15px;
   }
+
+  .form-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-actions { width: 100%; }
+  .form-actions .primary-action { margin-left: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

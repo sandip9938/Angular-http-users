@@ -5,5 +5,5 @@ export interface User {
   phone: string;
   website?: string;
 }
-
+// Define a type for creating new users, omitting the 'id' property
 export type NewUser = Omit<User, 'id'>;
